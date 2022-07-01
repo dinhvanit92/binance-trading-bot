@@ -37,8 +37,7 @@ const execute = async (logger, rawData) => {
 
   slack.sendMessage(
     `${symbol} Cancel Action (${moment().format('HH:mm:ss.SSS')}): \n` +
-      `- Order: \`\`\`${JSON.stringify(order, undefined, 2)}\`\`\`\n` +
-      `- Current API Usage: ${getAPILimit(logger)}`
+    `- Order: \`\`\`${order.origQty}\`\`\`\n`
   );
 
   logger.info(
@@ -72,13 +71,8 @@ const execute = async (logger, rawData) => {
   });
 
   slack.sendMessage(
-    `${symbol} Cancel Action Result (${moment().format('HH:mm:ss.SSS')}):\n` +
-      `- Order Result: \`\`\`${JSON.stringify(
-        orderResult,
-        undefined,
-        2
-      )}\`\`\`\n` +
-      `- Current API Usage: ${getAPILimit(logger)}`
+    `${symbol} :x: Huỷ Lệnh (${moment().format('HH:mm:ss.SSS')}):\n` +
+    `- Order Result: ${orderResult.price}`
   );
 
   data.buy.processMessage = `The order has been cancelled.`;
