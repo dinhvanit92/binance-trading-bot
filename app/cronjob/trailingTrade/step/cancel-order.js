@@ -36,8 +36,7 @@ const execute = async (logger, rawData) => {
   };
 
   slack.sendMessage(
-    `${symbol} Cancel Action (${moment().format('HH:mm:ss.SSS')}): \n` +
-    `- Order: \`\`\`${order.origQty}\`\`\`\n`
+    `${symbol} Khởi tạo lệnh Huỷ :red_circle: \`${order.origQty}\ (${moment().format('HH:mm:ss.SSS')}): \n`
   );
 
   logger.info(
@@ -72,7 +71,7 @@ const execute = async (logger, rawData) => {
 
   slack.sendMessage(
     `${symbol} :x: Huỷ Lệnh (${moment().format('HH:mm:ss.SSS')}):\n` +
-    `- Order Result: ${orderResult.price}`
+    `- Order Result: \`${orderResult.price}\``
   );
 
   data.buy.processMessage = `The order has been cancelled.`;

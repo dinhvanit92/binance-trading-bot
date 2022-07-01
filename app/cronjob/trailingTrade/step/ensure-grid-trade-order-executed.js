@@ -108,7 +108,7 @@ const slackMessageOrderFilled = async (
       saveLog: true
     },
     `The ${side} order of the grid trade #${humanisedGridTradeIndex} ` +
-      `for ${symbol} has been executed successfully.`
+    `for ${symbol} has been executed successfully.`
   );
 
   PubSub.publish('frontend-notification', {
@@ -123,12 +123,12 @@ const slackMessageOrderFilled = async (
       `${symbol} ${side.toUpperCase()} Grid Trade #${humanisedGridTradeIndex} Order Filled (${moment().format(
         'HH:mm:ss.SSS'
       )}): *${type}*\n` +
-        `- Order Result: \`\`\`${JSON.stringify(
-          orderResult,
-          undefined,
-          2
-        )}\`\`\`\n` +
-        `- Current API Usage: ${getAPILimit(logger)}`
+      `- Order Result: \`\`\`${JSON.stringify(
+        orderResult,
+        undefined,
+        2
+      )}\`\`\`\n` +
+      `- Current API Usage: ${getAPILimit(logger)}`
     );
   }
 
@@ -168,7 +168,7 @@ const slackMessageOrderDeleted = async (
       saveLog: true
     },
     `The ${side} order of the grid trade #${humanisedGridTradeIndex} ` +
-      `for ${symbol} is ${orderResult.status}. Stop monitoring.`
+    `for ${symbol} is ${orderResult.status}. Stop monitoring.`
   );
 
   PubSub.publish('frontend-notification', {
@@ -180,15 +180,10 @@ const slackMessageOrderDeleted = async (
 
   if (notifyOrderExecute) {
     return slack.sendMessage(
-      `${symbol} ${side.toUpperCase()} Grid Trade #${humanisedGridTradeIndex} Order Removed (${moment().format(
+      `${symbol} ${side.toUpperCase()} GT #${humanisedGridTradeIndex} Order Removed (${moment().format(
         'HH:mm:ss.SSS'
       )}): *${type}*\n` +
-        `- Order Result: \`\`\`${JSON.stringify(
-          orderResult,
-          undefined,
-          2
-        )}\`\`\`\n` +
-        `- Current API Usage: ${getAPILimit(logger)}`
+      `- Order Result: \`${orderResult.price}\`\n`
     );
   }
   return true;
@@ -237,12 +232,12 @@ const saveGridTrade = async (logger, rawData, order) => {
       `${symbol} ${side.toUpperCase()} Grid Trade Updated (${moment().format(
         'HH:mm:ss.SSS'
       )}): *${type}*\n` +
-        `- New Gird Trade: \`\`\`${JSON.stringify(
-          newGridTrade,
-          undefined,
-          2
-        )}\`\`\`\n` +
-        `- Current API Usage: ${getAPILimit(logger)}`
+      `- New Gird Trade: \`\`\`${JSON.stringify(
+        newGridTrade,
+        undefined,
+        2
+      )}\`\`\`\n` +
+      `- Current API Usage: ${getAPILimit(logger)}`
     );
   }
   return saveSymbolGridTrade(logger, symbol, newGridTrade);
